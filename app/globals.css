@@ -156,6 +156,11 @@ a { color: inherit; text-decoration: none; }
 @keyframes pulseHint { 0%,100%{opacity:0.4} 50%{opacity:0.8} }
 @keyframes flowLine { 0%{background-position:0% 0%} 100%{background-position:0% 100%} }
 
+/* Hero since badge */
+.hero-since-badge { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; justify-content: center; }
+.hero-since-line { flex: 1; max-width: 60px; height: 1px; background: linear-gradient(to right, transparent, rgba(197,168,128,0.5), transparent); }
+.hero-since-text { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(197,168,128,0.75); white-space: nowrap; font-family: var(--font-inter); }
+
 /* ── Portfolio Section ───────────────────────────────────────── */
 .portfolio-section { padding: 4rem 0; background-color: var(--bg-primary); position: relative; z-index: 4; }
 .section-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }

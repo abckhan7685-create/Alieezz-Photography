@@ -28,6 +28,11 @@ export function ScrollCanvas() {
                 <span>Scroll to Explore</span>
                 <div className="hint-line"></div>
               </div>
+              <div className="hero-since-badge">
+                <span className="hero-since-line"></span>
+                <span className="hero-since-text">We are saving your memories since 2015</span>
+                <span className="hero-since-line"></span>
+              </div>
             </div>
           </div>
 
