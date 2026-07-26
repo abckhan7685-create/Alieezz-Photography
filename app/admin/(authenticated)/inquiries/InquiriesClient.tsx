@@ -6,7 +6,6 @@ type Inquiry = {
   id: string;
   name: string;
   email: string;
-  phone: string | null;
   shootType: string;
   date: string;
   message: string;
@@ -172,14 +171,6 @@ export default function InquiriesClient({ inquiries, updateStatus }: Props) {
                     {selected.email}
                   </a>
                 </div>
-                {selected.phone && (
-                  <div>
-                    <p style={{ fontSize: '0.7rem', color: 'var(--accent-gold)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>Phone</p>
-                    <a href={`tel:${selected.phone}`} style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.9rem' }}>
-                      {selected.phone}
-                    </a>
-                  </div>
-                )}
                 <div>
                   <p style={{ fontSize: '0.7rem', color: 'var(--accent-gold)', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '0.4rem' }}>Shoot Type</p>
                   <span style={{ fontSize: '0.9rem', color: 'var(--text-primary)', padding: '3px 10px', background: 'rgba(197,168,128,0.08)', border: '1px solid rgba(197,168,128,0.2)', borderRadius: '4px', display: 'inline-block' }}>
