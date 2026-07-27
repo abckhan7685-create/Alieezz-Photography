@@ -10,14 +10,18 @@ export async function addFilm(formData: FormData) {
   
   // Automatically convert standard YouTube or Google Drive links into embed links
   let videoUrl = formData.get('videoUrl') as string;
+  let autoThumbnail = '';
   const ytMatch = videoUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
   
   if (ytMatch && ytMatch[1]) {
     videoUrl = `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`;
+    autoThumbnail = `https://img.youtube.com/vi/${ytMatch[1]}/maxresdefault.jpg`;
   } else {
     const driveMatch = videoUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
     if (driveMatch && driveMatch[1]) {
       videoUrl = `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
+      // Google Drive hidden thumbnail endpoint
+      autoThumbnail = `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1920-h1080`;
     }
   }
 
@@ -53,9 +57,9 @@ export async function addFilm(formData: FormData) {
   }
 
   // If no image uploaded and no manual thumbnail URL provided,
-  // automatically use YouTube's own thumbnail for the video
-  if ((!imageFile || imageFile.size === 0) && !thumbnail && ytMatch && ytMatch[1]) {
-    thumbnail = `https://img.youtube.com/vi/${ytMatch[1]}/maxresdefault.jpg`;
+  // automatically use the generated thumbnail from YouTube or Google Drive
+  if ((!imageFile || imageFile.size === 0) && !thumbnail && autoThumbnail) {
+    thumbnail = autoThumbnail;
   }
 
   await prisma.film.create({
