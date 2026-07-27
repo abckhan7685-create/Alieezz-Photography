@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 import { addCategory, deleteCategory } from '@/app/actions/categories';
+import { SubmitButton } from '@/components/Admin/SubmitButton';
 
 export default async function PortfolioAdminPage() {
   const [items, categories] = await Promise.all([
@@ -94,7 +95,11 @@ export default async function PortfolioAdminPage() {
                   </div>
                   <form action={deleteItem}>
                     <input type="hidden" name="id" value={item.id} />
-                    <button type="submit" className="admin-danger-btn">Delete</button>
+                    <SubmitButton 
+                      defaultText="Delete" 
+                      loadingText="Deleting..." 
+                      className="admin-danger-btn" 
+                    />
                   </form>
                 </div>
               ))}
@@ -152,9 +157,12 @@ export default async function PortfolioAdminPage() {
                   <input type="number" name="order" defaultValue="0" className="admin-input" />
                 </div>
 
-                <button type="submit" className="admin-primary-btn" style={{ justifyContent: 'center', marginTop: '0.5rem' }}>
-                  Add to Portfolio
-                </button>
+                <SubmitButton 
+                  defaultText="Add to Portfolio" 
+                  loadingText="Adding..." 
+                  className="admin-primary-btn" 
+                  style={{ justifyContent: 'center', marginTop: '0.5rem' }} 
+                />
               </form>
             </div>
           </div>
@@ -174,7 +182,12 @@ export default async function PortfolioAdminPage() {
                       <span style={{ fontSize: '0.875rem', color: 'var(--text-primary)', letterSpacing: '0.03em' }}>{cat.name}</span>
                       <form action={deleteCategory}>
                         <input type="hidden" name="id" value={cat.id} />
-                        <button type="submit" className="admin-danger-btn" style={{ padding: '0.3rem 0.75rem', fontSize: '0.72rem' }}>Remove</button>
+                        <SubmitButton 
+                          defaultText="Remove" 
+                          loadingText="Removing..." 
+                          className="admin-danger-btn" 
+                          style={{ padding: '0.3rem 0.75rem', fontSize: '0.72rem' }} 
+                        />
                       </form>
                     </div>
                   ))}
@@ -184,9 +197,12 @@ export default async function PortfolioAdminPage() {
               {/* Add category form */}
               <form action={addCategory} style={{ display: 'flex', gap: '0.75rem' }}>
                 <input type="text" name="name" required className="admin-input" placeholder="e.g. Weddings" style={{ flex: 1 }} />
-                <button type="submit" className="admin-primary-btn" style={{ flexShrink: 0, padding: '0 1.25rem' }}>
-                  Add
-                </button>
+                <SubmitButton 
+                  defaultText="Add" 
+                  loadingText="Adding..." 
+                  className="admin-primary-btn" 
+                  style={{ flexShrink: 0, padding: '0 1.25rem' }} 
+                />
               </form>
             </div>
           </div>

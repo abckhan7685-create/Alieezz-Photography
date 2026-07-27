@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma';
 import { addFilm, deleteFilm } from '@/app/actions/films';
+import { SubmitButton } from '@/components/Admin/SubmitButton';
 
 export default async function FilmsAdminPage() {
   const films = await prisma.film.findMany({ orderBy: { order: 'asc' } });
@@ -50,7 +51,11 @@ export default async function FilmsAdminPage() {
                   {/* Delete */}
                   <form action={deleteFilm}>
                     <input type="hidden" name="id" value={film.id} />
-                    <button type="submit" className="admin-danger-btn">Delete</button>
+                    <SubmitButton 
+                      defaultText="Delete" 
+                      loadingText="Deleting..." 
+                      className="admin-danger-btn" 
+                    />
                   </form>
                 </div>
               ))}
@@ -101,9 +106,12 @@ export default async function FilmsAdminPage() {
                 <input type="number" name="order" defaultValue="0" className="admin-input" />
               </div>
 
-              <button type="submit" className="admin-primary-btn" style={{ marginTop: '0.5rem', justifyContent: 'center' }}>
-                Add Film
-              </button>
+              <SubmitButton 
+                defaultText="Add Film" 
+                loadingText="Adding..." 
+                className="admin-primary-btn" 
+                style={{ marginTop: '0.5rem', justifyContent: 'center' }} 
+              />
             </form>
           </div>
         </div>

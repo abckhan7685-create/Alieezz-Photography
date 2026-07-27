@@ -155,6 +155,7 @@ a { color: inherit; text-decoration: none; }
 .hint-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--accent-gold) 50%, rgba(255,255,255,0) 100%); background-size: 100% 200%; animation: flowLine 2s infinite linear; }
 @keyframes pulseHint { 0%,100%{opacity:0.4} 50%{opacity:0.8} }
 @keyframes flowLine { 0%{background-position:0% 0%} 100%{background-position:0% 100%} }
+@keyframes spin { 100% { transform: rotate(360deg); } }
 
 /* Hero since badge */
 .hero-since-badge { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; justify-content: center; }
