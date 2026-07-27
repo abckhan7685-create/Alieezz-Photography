@@ -26,6 +26,10 @@ export default async function Home() {
     orderBy: { order: 'asc' }
   });
 
+  const categories = await prisma.category.findMany({
+    orderBy: { order: 'asc' }
+  });
+
   const settings = await getSiteSettings();
 
   return (
@@ -34,7 +38,7 @@ export default async function Home() {
       <WhatsAppButton phoneNumber={settings.phoneNumber} />
       <ScrollCamera />
       <ScrollCanvas />
-      <Carousel items={portfolioItems} />
+      <Carousel items={portfolioItems} categories={categories.map(c => c.name)} />
       <CinematicReel films={films} />
       <About />
       <Founder />

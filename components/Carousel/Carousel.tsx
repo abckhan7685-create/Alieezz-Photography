@@ -12,11 +12,11 @@ type PortfolioItem = {
   imageUrl: string;
 };
 
-const CATEGORIES = ['All', 'Couples', 'Portraits', 'Cinematic'];
-
-export function Carousel({ items }: { items: PortfolioItem[] }) {
+export function Carousel({ items, categories }: { items: PortfolioItem[], categories: string[] }) {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedImage, setSelectedImage] = useState<PortfolioItem | null>(null);
+
+  const displayCategories = ['All', ...categories];
   
   const filteredItems = items.filter(item => 
     activeCategory === 'All' || item.category === activeCategory
@@ -54,7 +54,7 @@ export function Carousel({ items }: { items: PortfolioItem[] }) {
           </div>
 
           <div className="filter-controls">
-            {CATEGORIES.map(cat => (
+            {displayCategories.map(cat => (
               <button 
                 key={cat}
                 className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
