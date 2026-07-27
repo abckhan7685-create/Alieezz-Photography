@@ -8,11 +8,17 @@ export async function addFilm(formData: FormData) {
   const subtitle = formData.get('subtitle') as string;
   let thumbnail = formData.get('thumbnail') as string;
   
-  // Automatically convert standard YouTube links into embed links
+  // Automatically convert standard YouTube or Google Drive links into embed links
   let videoUrl = formData.get('videoUrl') as string;
   const ytMatch = videoUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+  
   if (ytMatch && ytMatch[1]) {
     videoUrl = `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1`;
+  } else {
+    const driveMatch = videoUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveMatch && driveMatch[1]) {
+      videoUrl = `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
+    }
   }
 
   const order = parseInt(formData.get('order') as string) || 0;
