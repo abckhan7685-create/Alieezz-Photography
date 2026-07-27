@@ -206,6 +206,17 @@ a { color: inherit; text-decoration: none; }
 .carousel-dot { width: 8px; height: 8px; border-radius: 50%; border: none; background-color: var(--text-muted); cursor: pointer; padding: 0; transition: background-color 0.35s, transform 0.35s, width 0.35s; }
 .carousel-dot.active { background-color: var(--accent-gold); transform: scale(1.1); width: 22px; border-radius: 4px; }
 
+/* Portfolio Lightbox Modal */
+.portfolio-lightbox { position: fixed; inset: 0; z-index: 1000; background-color: rgba(0,0,0,0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 2rem; animation: fadeIn 0.3s ease; }
+.lightbox-content { position: relative; width: 100%; max-width: 1400px; height: 100%; display: flex; flex-direction: column; }
+.lightbox-close { position: absolute; top: 0; right: 0; background: none; border: none; color: rgba(255,255,255,0.7); font-size: 1.8rem; cursor: pointer; z-index: 1001; transition: color 0.3s ease; padding: 0.5rem; line-height: 1; }
+.lightbox-close:hover { color: var(--accent-gold); }
+.lightbox-img-wrapper { position: relative; flex: 1; min-height: 0; margin-top: 2.5rem; }
+.lightbox-caption { text-align: center; padding: 1.5rem 0 0; flex-shrink: 0; }
+.lightbox-caption h3 { font-size: 1.8rem; color: var(--text-primary); margin-bottom: 0.4rem; font-weight: 300; font-family: var(--font-cormorant); }
+.lightbox-caption p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
+
+
 /* ── Scroll Camera Parallax ─────────────────────────────────── */
 .scroll-camera { position: fixed; top: 0; left: 0; z-index: 50; pointer-events: none; will-change: transform, opacity; opacity: 0; transition: opacity 0.3s ease; }
 .scroll-camera.visible { opacity: 1; }
@@ -644,6 +655,9 @@ a { color: inherit; text-decoration: none; }
 
   /* Portfolio */
   .portfolio-section { padding: 3rem 0; }
+  .portfolio-lightbox { padding: 1.5rem 1rem; }
+  .lightbox-caption h3 { font-size: 1.4rem; }
+  .lightbox-close { top: -1.5rem; }
   .section-header { margin-bottom: 2rem; }
   .carousel-track { height: 380px; }
   .carousel-card { width: 220px; height: 330px; }
