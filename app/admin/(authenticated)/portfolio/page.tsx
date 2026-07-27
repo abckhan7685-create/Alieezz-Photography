@@ -25,6 +25,14 @@ export default async function PortfolioAdminPage() {
     const imageFile = formData.get('imageFile') as File | null;
     const order = parseInt(formData.get('order') as string) || 0;
 
+    // Convert Google Drive links into direct thumbnail links
+    if (imageUrl) {
+      const driveMatch = imageUrl.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (driveMatch && driveMatch[1]) {
+        imageUrl = `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1920-h1080`;
+      }
+    }
+
     if (imageFile && imageFile.size > 0) {
       const bytes = await imageFile.arrayBuffer();
       const buffer = Buffer.from(bytes);
@@ -136,7 +144,7 @@ export default async function PortfolioAdminPage() {
                 <div style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.8rem', fontStyle: 'italic' }}>— OR —</div>
                 <div className="admin-field">
                   <label className="admin-label">Image URL</label>
-                  <input type="text" name="imageUrl" className="admin-input" placeholder="https://..." />
+                  <input type="text" name="imageUrl" className="admin-input" placeholder="https://... or Google Drive link" />
                 </div>
 
                 <div className="admin-field">
